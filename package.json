@@ -1,0 +1,53 @@
+{
+  "name": "api-apix-file",
+  "author": "BH2",
+  "version": "1.0.0",
+  "description": "API - Arquivos APIX001 e APIX002 do Pix",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "dev": "export NODE_ENV=DEV && tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
+    "devw": "set NODE_ENV=DEV && tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
+    "start": "export NODE_ENV=PROD && node dist/index.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "export NODE_ENV=TEST && $(npm bin)/mocha -r ts-node/register --exit --reporter=spec --recursive src/test/**.spec.ts",
+    "tsc": "tsc"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "bcryptjs": "^2.4.3",
+    "csvtojson": "2.0.10",
+    "dotenv": "^8.2.0",
+    "fast-xml-parser": "3.17.4",
+    "jsonwebtoken": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^5.22.3",
+    "sequelize-typescript": "^1.1.0",
+    "typescript": "^3.9.6",
+    "uuid": "^8.2.0",
+    "xhelpers-api": "^2.1.10",
+    "xml2json": "0.12.0",
+    "xsd2jsonschema": "0.3.7"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.29",
+    "@types/sequelize": "^4.28.8",
+    "@types/boom": "^7.3.0",
+    "@types/hapi__hapi": "^19.0.3",
+    "@types/hapi__joi": "17.1.4",
+    "@types/jsonwebtoken": "^8.3.4",
+    "@types/node": "14.0.23",
+    "@types/validator": "13.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "7.2.0",
+    "nodemon": "^2.0.4",
+    "ts-loader": "7.0.5",
+    "ts-node": "8.10.2",
+    "tsc-watch": "4.2.9",
+    "tsconfig-paths": "^3.5.0",
+    "tslint": "^6.1.2"
+  }
+}

@@ -1,0 +1,27 @@
+TipoArquivo;APIX001
+DtArquivo;2020-12-02
+Ano;2020
+Mes;12
+ISPB;1199999999
+NomeResp;Jose da Silva
+EmailResp;jose@silva.com
+TelResp;1234
+TipoEnvio;I
+Perc50TempoExpUsuarioInter;5.2
+Perc99TempoExpUsuarioInter;5.2
+Perc50TempoExpUsuarioIntra;5.2
+Perc99TempoExpUsuarioIntra;5.2
+Perc99TempoUsuarioConsulta;5.2
+Perc99TempoEnvioRegistro;5.2
+Perc99TempoExpUsuarioRegistro;5.2
+Perc99TempoExpUsuarioExclusao;5.2
+Perc99TempoNotificacaoPortabilidade;5.2
+Perc99TempoEnvioPortabilidade;5.2
+QtdConsultas;1250
+IndiceDisponibilidade;99.85
+Transacao;10;200.00;2
+Transacao;20;400.00;1
+Transacao;5;100.00;5
+Devolucao;10;250.00
+Receita;1624.25;1
+Receita;2321.56;2
