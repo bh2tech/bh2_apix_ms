@@ -1,0 +1,266 @@
+aliases:
+  - &install-environment-requirements
+    run:
+      name: Install environment requirements
+      command: | 
+        sudo apt-get update
+        sudo apt-get install gettext-base
+        sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        sudo chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+        sudo apt-get install git
+        sudo apt-get install openssh-client
+  - &install-python-requirements
+    run:
+      name: Install python requirements
+      command: | 
+        python3.6 -m venv venv
+        echo "source venv/bin/activate" >> $BASH_ENV
+        . venv/bin/activate
+        pip install setuptools --upgrade
+        pip install pytest-cov
+        pip install -r requirements.txt
+  - &test
+    run:
+      name: Tests
+      command: |
+        . venv/bin/activate
+        python -m pytest --cov=./
+        bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+defaults: &defaults
+  docker:
+    - image: circleci/python:3.6.6-stretch-browsers
+    - image: mongo
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: mongo
+        MONGO_INITDB_ROOT_PASSWORD: mongo
+version: 2
+jobs:
+  test:
+      <<: *defaults
+      steps:
+        - checkout
+        # - setup_remote_docker:
+        #     docker_layer_caching: true
+        - <<: *install-environment-requirements
+        - <<: *install-python-requirements
+        - <<: *test
+
+  build:
+    docker:
+      - image: circleci/python:3.6.6-stretch-browsers
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Install awscli"
+          command: |
+            sudo pip install --upgrade pip
+            sudo pip install awscli
+
+      - run:
+          name: "Login in to Repository"
+          command: |
+            export AWS_DEFAULT_REGION=$ECR_REGION
+            if [ "${ECR_REPOSITORY_NAME}" != "" ]
+            then
+              aws ecr describe-repositories --repository-names $ECR_REPOSITORY_NAME || \
+                aws ecr create-repository --repository-name $ECR_REPOSITORY_NAME || true
+              export ECR_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}"
+            fi
+            if [ "${ECR_REPOSITORY}" != "" ]
+            then
+              eval $(aws ecr get-login --region $ECR_REGION --no-include-email)
+            fi
+            if [ "${DOCKER_REPOSITORY}" != "" ]
+            then
+              docker login --username=$DOCKER_HUB_USER --password=$DOCKER_HUB_PASSWORD
+            fi
+
+      - run:
+          name: "Prepare Environment"
+          command: |
+            env > .env
+
+      - run:
+          name: "build and push"
+          command: |
+            if [ "${ECR_REPOSITORY_NAME}" != "" ]
+            then
+              export ECR_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}"
+            fi
+
+            if [ "${ECR_REPOSITORY}" != "" ]
+            then
+              export COMMIT_TAG="${ECR_REPOSITORY}:${CIRCLE_SHA1}-${ENV}"
+              export TAG_LATEST="${ECR_REPOSITORY}:latest-${ENV}"
+            else
+              export COMMIT_TAG="${DOCKER_REPOSITORY}:${CIRCLE_SHA1}-${ENV}"
+              export TAG_LATEST="${DOCKER_REPOSITORY}:latest-${ENV}"
+            fi
+            docker build -t $TAG_LATEST -t $COMMIT_TAG .
+            docker push $TAG_LATEST
+            docker push $COMMIT_TAG
+
+  deploy:
+    docker:
+      - image: circleci/python:3.6.6-stretch-browsers
+    steps:
+      - <<: *install-environment-requirements
+      - checkout
+      - run:
+          name: "Install awscli"
+          command: |
+            sudo pip install --upgrade pip
+            sudo pip install awscli
+      - run:
+          name: "Connect to cluster"
+          command: |
+            export KUBECONFIG="/tmp/kubeconfig"
+            kubectl config --kubeconfig=/tmp/kubeconfig set-cluster cluster --server=$K8S_CLUSTER_IP --insecure-skip-tls-verify
+            kubectl config --kubeconfig=/tmp/kubeconfig set-credentials admin --token=$K8S_TOKEN
+            kubectl config --kubeconfig=/tmp/kubeconfig set-context deploy --cluster=cluster --user=admin
+            kubectl config --kubeconfig=/tmp/kubeconfig use-context deploy
+            kubectl config --kubeconfig=/tmp/kubeconfig view
+      
+      - run:
+          name: "Create route53 record"
+          command: |
+            if [ ${ENV} == "production" ]
+            then
+              export SERVICE_URL="${SERVICE_URL}"
+            else
+              export SERVICE_URL="${ENV}.${SERVICE_URL}"
+            fi
+
+            if [ "${AWS_HOSTED_ZONE_ID}" != "" ]
+            then
+            export AUX_STRING=$(echo $K8S_CLUSTER_IP| cut -d'/' -f 3)
+            export CLUSTER_IP=$(echo $AUX_STRING| cut -d':' -f 1)
+            cat << EOF > route53.json
+            {
+              "Comment": "update from circle ci",
+              "Changes": [
+                {
+                  "Action": "UPSERT",
+                  "ResourceRecordSet": {
+                    "Name": "$SERVICE_URL",
+                    "Type": "A",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                      {
+                        "Value": "$CLUSTER_IP"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+            EOF
+            aws route53 change-resource-record-sets --hosted-zone-id $AWS_HOSTED_ZONE_ID --change-batch file://route53.json
+            rm route53.json
+            fi
+
+      - run:
+          name: Deploy
+          command: |
+            if [ "${ECR_REPOSITORY_NAME}" != "" ]
+            then
+              export ECR_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}"
+            fi
+            if [ "${ECR_REPOSITORY}" == "" ]
+            then
+              export IMAGE_REPO_URL="${DOCKER_REPOSITORY}:${CIRCLE_SHA1}-${ENV}"
+            else
+              export IMAGE_REPO_URL="${ECR_REPOSITORY}:${CIRCLE_SHA1}-${ENV}"
+            fi
+
+            if [ ${ENV} == "production" ]
+            then
+              export SERVICE_URL="${SERVICE_URL}"
+            else
+              export SERVICE_URL="${ENV}.${SERVICE_URL}"
+            fi
+
+            export CERT_MANAGER_ISSUE_TEMPORARY_CERTICATE="false"
+            export INGRESS_EDIT_IN_PLACE="false"
+
+            envsubst < .infra/deployment.yaml > output.yaml
+            kubectl config --kubeconfig=/tmp/kubeconfig use-context deploy
+
+            cat << EOF | kubectl --kubeconfig=/tmp/kubeconfig apply -f -
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: $K8S_NAMESPACE
+            EOF
+
+            kubectl delete --kubeconfig=/tmp/kubeconfig secret $SERVICE_NAME --namespace $K8S_NAMESPACE --ignore-not-found
+
+            env > .env
+            kubectl create --kubeconfig=/tmp/kubeconfig secret generic $SERVICE_NAME --from-env-file=.env --namespace $K8S_NAMESPACE
+            kubectl apply --kubeconfig=/tmp/kubeconfig -f output.yaml
+
+  deploy-eks:
+    docker:
+      - image: circleci/python:3.6.6-stretch-browsers
+    steps:
+      - <<: *install-environment-requirements
+      - checkout
+      - run:
+          name: "Install awscli"
+          command: |
+            sudo pip install --upgrade pip
+            sudo pip install awscli
+      - run:
+          name: "Connect to cluster"
+          command: |
+            aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+      - run:
+          name: Deploy
+          command: |
+            export IMAGE_REPO_URL="${ECR_REPOSITORY}:${CIRCLE_SHA1}-${ENV}"
+
+            if [ ${ENV} == "production" ]
+            then
+              export SERVICE_URL="${SERVICE_URL}"
+            else
+              export SERVICE_URL="${ENV}.${SERVICE_URL}"
+            fi
+
+            export CERT_MANAGER_ISSUE_TEMPORARY_CERTICATE="true"
+            export INGRESS_EDIT_IN_PLACE="true"
+
+            envsubst < .infra/deployment.yaml > output.yaml
+
+            kubectl delete secret $SERVICE_NAME --namespace $K8S_NAMESPACE --ignore-not-found
+
+            env > .env
+            kubectl create secret generic $SERVICE_NAME --from-env-file=.env --namespace $K8S_NAMESPACE
+            kubectl apply -f output.yaml
+
+workflows:
+  version: 2
+  development:
+    jobs:
+      # - test:
+      #     context: test
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      - build:
+          context: poc
+          filters:
+            branches:
+              only: 
+                - master
+          # requires:
+          #   - test
+      - deploy:
+          requires:
+            - build
+          context: poc
+          filters:
+            branches:
+              only: master
