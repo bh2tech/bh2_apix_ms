@@ -97,10 +97,10 @@ Routing table:
         📄  post -      /api/arquivos/
 ```
 
-## Cloud (AWS/Azure/GCP)
+## Cloud (AWS/Azure/GCP/Heroku)
 
 ```
-DEMO:
+DEMO: https://bh2-apix-ms.herokuapp.com/documentation
 ```
 
 ## Docker build
