@@ -6,7 +6,7 @@ A bh2 é uma Consultoria de Negócios e Desenvolvimento de Software que atua pri
 
 ## Description
 
-O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedores das instituições na geração dos arquivos **APIX001** e **APIX002**, devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela Instrução Normativa nº 32, de 26 de outubro de 2020.   
+O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedores na geração dos arquivos **APIX001** e **APIX002**, devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela Instrução Normativa nº 32, de 26 de outubro de 2020. Fiquem à vontade para contribuir neste repositório.
 
 **Material de apoio:**
 

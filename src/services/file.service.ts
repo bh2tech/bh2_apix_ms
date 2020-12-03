@@ -68,7 +68,7 @@ export default class FileService {
 
   async demoFile(query: any) {
     const content = `<?xml version="1.0" encoding="utf-8"?>
-  <${query.TipoArquivo} DtArquivo="2012-12-13" Ano="1999" Mes="1234" ISPB="str1234" NomeResp="str1234" EmailResp="str1234" TelResp="str1234" TipoEnvio="I">
+  <${query.TipoArquivo} DtArquivo="2012-12-13" Ano="1999" Mes="12" ISPB="str1234" NomeResp="str1234" EmailResp="str1234" TelResp="str1234" TipoEnvio="I">
     <Transacoes>
       <Transacao>
         <QtdTransacoes>1234</QtdTransacoes>
