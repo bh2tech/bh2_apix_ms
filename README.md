@@ -1,8 +1,12 @@
 # API - APIX File (Gerar os arquivos APIX001 e APIX002)
 
+## About bh2
+
+A bh2 é uma Consultoria de Negócios e Desenvolvimento de Software que atua principalmente no Mercado Financeiro. Temos auxiliado diversas empresas na construção e evolução da Transformação Digital, desde grandes instituições a startups que validaram seus produtos no Lift (Laboratório de Inovações Financeiras Tecnológicas - Coordenado pela Fenasbac e Banco Central). O Pix e Open Banking estão em alta por aqui. 
+
 ## Description
 
-O objetivo deste repositório é oferecer um meio de auxiliar os desenvolvedores das instituições na geração dos arquivos **APIX001** e **APIX002**. Devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela Instrução Normativa nº 32, de 26 de outubro de 2020. 
+O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedores das instituições na geração dos arquivos **APIX001** e **APIX002**, devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela Instrução Normativa nº 32, de 26 de outubro de 2020.   
 
 **Material de apoio:**
 
@@ -100,7 +104,7 @@ Routing table:
 ## Cloud (AWS/Azure/GCP/Heroku)
 
 ```
-DEMO: https://bh2-apix-ms.herokuapp.com/documentation
+DEMO: https://apix-ms.bh2.tech/documentation
 ```
 
 ## Docker build
