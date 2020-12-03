@@ -15,7 +15,7 @@ RUN npm run build
 
 # Runtime
 FROM node:12.16.3-alpine as runtime
-ENV NODE_VERSION 10.16.3
+ENV NODE_VERSION 12.16.3
 RUN apk add --no-cache tzdata
 ENV TZ 'America/Sao_Paulo'
 
@@ -33,4 +33,6 @@ WORKDIR /app
 
 ENV NODE_ENV=PROD
 ENV HOST=0.0.0.0
+ENV PORT=80
+
 CMD ["npm", "start"]
