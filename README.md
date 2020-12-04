@@ -16,6 +16,8 @@ O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedore
 
 => *Para envio das informações deverão ser observados os procedimentos dispostos no Anexo II à Instrução Normativa nº 32, de 2020, bem como as orientações específicas a serem divulgadas pelo Banco Central do Brasil.*
 
+![](./envio.png)
+
 **A API contém duas rotas principais:**
 
 - **/api/arquivos** => Geração do arquivo a partir de um payload em JSON que devolve o XML.
