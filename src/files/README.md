@@ -1,6 +1,6 @@
 ## Layout do Arquivo CSV
 
-O arquivo foi criado com um conceito *transposto* para não ser necessário gerar tipos de registro para determinados tipos de linha. Por exemplo, informações de **Transacao** e **Receita**, elas ocorrem mais de uma vez e cada uma contém quantidade de campos diferentes, a ideia é criar um arquivo simples e fácil de montar através de [consultas](https://github.com/bh2tech/bh2_apix_ms/blob/master/src/arquivos/query.sql) em um banco de dados.
+O arquivo foi criado com um conceito *transposto* para não ser necessário gerar tipos de registro para determinados tipos de linha. Por exemplo, informações de **Transacao** e **Receita**, elas ocorrem mais de uma vez e cada uma contém quantidade de campos diferentes, a ideia é criar um arquivo simples e fácil de montar através de [consultas](https://github.com/bh2tech/bh2_apix_ms/blob/master/src/files/query.sql) em um banco de dados.
 
 Para saber quais informações deve gerar no arquivo consulte a referência logo abaixo em [*Campos do CSV*](#ancora1).
 
