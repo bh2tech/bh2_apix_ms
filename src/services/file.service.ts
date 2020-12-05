@@ -95,21 +95,21 @@ export default class FileService {
     <Receitas>
       <Receita>
         <ValorReceita>123.45</ValorReceita>
-        <FonteReceita>1234</FonteReceita>
+        <FonteReceita>1</FonteReceita>
       </Receita>
       <Receita>
         <ValorReceita>123.45</ValorReceita>
-        <FonteReceita>1234</FonteReceita>
+        <FonteReceita>2</FonteReceita>
       </Receita>
       <Receita>
         <ValorReceita>123.45</ValorReceita>
-        <FonteReceita>1234</FonteReceita>
+        <FonteReceita>3</FonteReceita>
       </Receita>
     </Receitas>
-    <TemposTransacoes Perc50TempoExpUsuarioInter="123.45" Perc99TempoExpUsuarioInter="123.45" Perc50TempoExpUsuarioIntra="123.45" Perc99TempoExpUsuarioIntra="123.45" />
-    <TemposDict Perc99TempoUsuarioConsulta="123.45" Perc99TempoEnvioRegistro="123.45" Perc99TempoExpUsuarioRegistro="123.45" Perc99TempoExpUsuarioExclusao="123.45" Perc99TempoNotificacaoPortabilidade="123.45" Perc99TempoEnvioPortabilidade="123.45" />
+    <TemposTransacoes Perc50TempoExpUsuarioInter="50.2" Perc99TempoExpUsuarioInter="50.2" Perc50TempoExpUsuarioIntra="50.2" Perc99TempoExpUsuarioIntra="50.2" />
+    <TemposDict Perc99TempoUsuarioConsulta="50.2" Perc99TempoEnvioRegistro="50.2" Perc99TempoExpUsuarioRegistro="50.2" Perc99TempoExpUsuarioExclusao="50.2" Perc99TempoNotificacaoPortabilidade="50.2" Perc99TempoEnvioPortabilidade="50.2" />
     <ConsultasDict QtdConsultas="1234" />
-    <Disponibilidade IndiceDisponibilidade="123.45" />
+    <Disponibilidade IndiceDisponibilidade="99.98" />
     </${query.TipoArquivo}>`;
 
     return content;
@@ -124,6 +124,9 @@ export default class FileService {
   }
 
   private generateXml(data: any) {
+    this.checkDuplicatedItems(data.Transacoes, "DetalhamentoTransacoes");
+    this.checkDuplicatedItems(data.Receitas, "FonteReceita");
+
     let content = `<?xml version="1.0" encoding="utf-8"?>\r\n`
     content += `<${data.TipoArquivo} DtArquivo="${data.DtArquivo}" Ano="${data.Ano}" Mes="${data.Mes}" ISPB="${data.ISPB}" NomeResp="${data.NomeResp}" EmailResp="${data.EmailResp}" TelResp="${data.TelResp}" TipoEnvio="${data.TipoEnvio}">\r\n`;
     content += `  <Transacoes>\r\n`;
@@ -151,4 +154,24 @@ export default class FileService {
     content += `</${data.TipoArquivo}>`;
     return content;
   }
+
+  private checkDuplicatedItems(data: any, fieldName: any) {
+    let dupEntries = [];
+    data.sort((a, b) => {
+      return a[fieldName] - b[fieldName];
+    }).reduce((acc, cur) => {
+      if (acc.length > 0 &&
+        acc[acc.length - 1][fieldName] === cur[fieldName]) {
+        dupEntries.push(cur);
+      }
+      acc.push(cur);
+      return acc;
+    }, []);
+    if (dupEntries.length > 0)
+      throw Boom.badRequest(
+        `"${fieldName} = ${dupEntries[dupEntries.length - 1][fieldName]}" duplicate item not allowed, check domain "${fieldName}" entries.`,
+        dupEntries[dupEntries.length - 1]
+      );
+  }
+
 }
