@@ -14,6 +14,7 @@ O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedore
 - [Layout do Arquivo](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001.xlsx)
 - [Manual de Tempos do Pix](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/IX_ManualdeTemposdoPix_versao2-1.pdf)  
 - [Arquivo XSD](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001.xsd)  
+- [Arquivos de Exemplo](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001-exemplos.zip)  
 
 => *Para envio das informações deverão ser observados os procedimentos dispostos no Anexo II à Instrução Normativa nº 32, de 2020, bem como as orientações específicas a serem divulgadas pelo Banco Central do Brasil.*
 
