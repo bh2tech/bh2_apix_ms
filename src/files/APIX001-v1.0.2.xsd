@@ -1,15 +1,12 @@
-const Xsd2JsonSchema = require('xsd2jsonschema').Xsd2JsonSchema;
-const xs2js = new Xsd2JsonSchema();
-
-const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
 
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
   <!-- +  BANCO CENTRAL DO BRASIL                                           + -->
   <!-- +  Documento 1201						    						+ -->
-  <!-- +  Versão 1.0.3							  							+ -->
+  <!-- +  Versão 1.0.2							  							+ -->
   <!-- +  Publicado em Outubro/2020			                    			+ -->
-  <!-- +  Atualizado em 03/12/2020                                          + -->
+  <!-- +  Atualizado em 16/11/2020                                          + -->
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- ******************************* -->
 	<!-- Definicao dos elementos simples -->
@@ -63,7 +60,7 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 	<!-- Transacoes -->
 	<xs:complexType name="tipoTransacoes">
 		<xs:sequence>
-			<xs:element name="Transacao" type="tipoTransacao" minOccurs="5" maxOccurs="5" /> <!-- NR v.1.0.3 -->
+			<xs:element name="Transacao" type="tipoTransacao" minOccurs="4" maxOccurs="4" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -142,8 +139,8 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 	<!-- Definicao de tipos genericos -->
 	<xs:simpleType name='tipoData'>
 		<xs:restriction base='xs:date'>
-			<xs:maxExclusive value='21500101' />
-			<xs:minExclusive value='19001231' />
+			<xs:maxExclusive value='2150-01-01' />
+			<xs:minExclusive value='1900-12-31' />
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -214,8 +211,8 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 	<xs:simpleType name='tipoDataMesAno'>
 		<xs:restriction base='xs:gYearMonth'>
 			<xs:whiteSpace value='collapse' />
-			<xs:minInclusive value='200001' />
-			<xs:maxExclusive value='205001' />
+			<xs:minInclusive value='2000-01' />
+			<xs:maxExclusive value='2050-01' />
 		</xs:restriction>
 	</xs:simpleType>
 	
@@ -239,8 +236,8 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 	<xs:simpleType name='tipoDataMesAnoDia'>
 		<xs:restriction base='xs:date'>
 			<xs:whiteSpace value='collapse' />
-			<xs:minInclusive value='20000101' />
-			<xs:maxExclusive value='20500101' />
+			<xs:minInclusive value='2000-01-01' />
+			<xs:maxExclusive value='2050-01-01' />
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -289,14 +286,10 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
                  </xs:restriction>
         </xs:simpleType>
 
-</xs:schema>`;
+</xs:schema>
 
+<!-- Tutorial de XML para uso de "unique" em elemento -->
+<!-- http://zvon.org/xxl/XMLSchemaTutorial/Output/ser_keys_st4.html -->
 
-const convertedSchemas = xs2js.processAllSchemas({
-	schemas: { 'APIX.xsd': XML_SCHEMA }
-});
-
-export const parse = () => {
-	const jsonSchema = convertedSchemas['APIX.xsd'].getJsonSchema();
-	return JSON.stringify(jsonSchema, null, 2);
-}
+<!-- Tutorial de XML para uso de "unique" em atributo -->
+<!-- http://zvon.org/xxl/XMLSchemaTutorial/Output/ser_keys_st0.html -->

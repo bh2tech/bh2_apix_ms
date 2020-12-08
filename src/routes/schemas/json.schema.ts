@@ -105,7 +105,6 @@ export const data = Joi.object({
         .example(5.2)
         .description("Percentil 99 do tempo decorrido entre a ação do usuário (confirmação ou cancelamento) e o envio da informação para o DICT (processo de portabilidade ou de reivindicação de posse)"),
     QtdConsultas: Joi.number()
-        .max(12)
         .required()
         .example(5)
         .description("Quantidade de consultas à base interna do participante"),
@@ -118,7 +117,6 @@ export const data = Joi.object({
         .items(
             Joi.object({
                 QtdTransacoes: Joi.number()
-                    .max(12)
                     .example(10)
                     .required(),
                 ValorTransacoes: Joi.number()
@@ -136,11 +134,10 @@ export const data = Joi.object({
                 5 => Transaçoes liquidadas dentro de um mesmo participante liquidante no SPI (caso 2 da Figura 1) (NR)
                 `)
             }).label("ItemTransacao")
-        ).required()
+        ).min(5).max(5).required()
         .label("Transacoes"),
     Devolucao: Joi.object({
         QtdDevolucoes: Joi.number()
-            .max(12)
             .example(10)
             .required(),
         ValorDevolucoes: Joi.number()
@@ -164,6 +161,6 @@ export const data = Joi.object({
             3 => Recebimento de transações por pessoa física
             `),
         }).label("ItemReceita")
-        ).required()
+        ).min(3).max(3).required()
         .label("Receitas")
 }).label("Dados");
