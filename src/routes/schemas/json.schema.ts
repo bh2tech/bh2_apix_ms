@@ -49,67 +49,105 @@ export const data = Joi.object({
         .max(100)
         .example("str1234")
         .description("E-mail do Responsável pelo Documento"),
-    TelResp: Joi.string
-        ().required()
+    TelResp: Joi.string()
+        .required()
         .max(14)
         .example("str1234")
         .description("Telefone do Responsável pelo Documento"),
     Perc50TempoExpUsuarioInter: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 50 do tempo relacionado à experiência do usuário pagador (transações liquidadas entre diferentes participantes)."),
+        .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
+        `),
     Perc99TempoExpUsuarioInter: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo relacionado à experiência do usuário pagador (transações liquidadas entre diferentes participantes)."),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
+        `),
     Perc50TempoExpUsuarioIntra: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 50 do tempo relacionado à experiência do usuário pagador (transações liquidadas dentro de uma mesma instituição)."),
+        .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
+        `),
     Perc99TempoExpUsuarioIntra: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo relacionado à experiência do usuário pagador (transações liquidadas dentro de uma mesma instituição)."),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
+        `),
     Perc99TempoUsuarioConsulta: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo do usuário pagador na consulta ao DICT"),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP com acesso direto ao DICT: Etapas 4 a 15 do fluxo detalhado na seção 8.1 do Manual Operacional do DICT (Versão 2.0).
+        PSP com acesso indireto ao DICT: Etapas 4 a 19 do fluxo detalhado na seção 8.2 do Manual Operacional do DICT (Versão 2.0).
+        `),
     Perc99TempoEnvioRegistro: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo para envio do código para e-mail ou número de telefone celular no registro de chave"),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP com acesso direto ao DICT: Etapas 4 a 5 do fluxo detalhado na seção 3.1 do Manual Operacional do DICT (Versão 2.0).
+        PSP com acesso indireto ao DICT: Etapas 4 a 5 do fluxo detalhado na seção 3.2 do Manual Operacional do DICT (Versão 2.0).
+        `),
     Perc99TempoExpUsuarioRegistro: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo relacionado à experiência do usuário pagador no registro de chave"),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP com acesso direto ao DICT: Etapas 6 a 15 do fluxo detalhado na seção 3.1 do Manual Operacional do DICT (Versão 2.0).
+        PSP com acesso indireto ao DICT: Etapas 6 a 19 do fluxo detalhado na seção 3.2 do Manual Operacional do DICT (Versão 2.0).
+        `),
     Perc99TempoExpUsuarioExclusao: Joi.number()
         .required()
+        .positive()
         .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo relacionado à experiência do usuário pagador na exclusão de chave"),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP com acesso direto ao DICT: Etapas 4 a 13 do fluxo detalhado na seção 4.1 do Manual Operacional do DICT (Versão 2.0).
+        PSP com acesso indireto ao DICT: Etapas 4 a 17 do fluxo detalhado na seção 4.2 do Manual Operacional do DICT (Versão 2.0).
+        `),
     Perc99TempoNotificacaoPortabilidade: Joi.number()
-        .precision(1)
         .required()
+        .positive()
+        .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo decorrido entre o recebimento (acknowledge) no DICT e a notificação ao usuário doador em ambiente logado (processo de portabilidade ou de reivindicação de posse)"),
+        .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP doador com acesso direto ao DICT: Etapas 1 a 2 dos fluxos detalhados nas seções 5.3 e 6.3  do Manual Operacional do DICT (Versão 2.0).
+        PSP doador com acesso indireto ao DICT: Etapas 1 a 6 do fluxo detalhado nas seções 5.4 e 6.4 do Manual Operacional do DICT (Versão 2.0).
+        `),
     Perc99TempoEnvioPortabilidade: Joi.number()
-        .precision(1)
         .required()
+        .positive()
+        .precision(1)
         .example(5.2)
-        .description("Percentil 99 do tempo decorrido entre a ação do usuário (confirmação ou cancelamento) e o envio da informação para o DICT (processo de portabilidade ou de reivindicação de posse)"),
+        .description(`Percentil 99 dos tempos (em segundos)detalhados na seção 3.2.2.3 do Manual de Tempos do Pix (Versão 2.0). (NR)
+        PSP doador com acesso direto ao DICT: Etapas 8 a 12 (portabilidade) e 8 a 19 (reinvindicação) a 2 dos fluxos detalha-dos nas seções 5.3 e 6.3  do Manual Ope-racional do DICT (Versão 2.0).
+        PSP doador com acesso indireto ao DICT: Etapas 10 a 14 (portabilidade) e 10 a 25 (reinvindicação) do fluxo deta-lhado nas seções 5.4 e 6.4 do Manual Operacional do DICT (Versão 2.0).
+        `),
     QtdConsultas: Joi.number()
         .required()
+        .positive()
         .example(5)
         .description("Quantidade de consultas à base interna do participante"),
     IndiceDisponibilidade: Joi.number()
         .required()
+        .positive()
         .precision(2)
         .example(99.85)
         .description("Índice de disponibilidade"),
@@ -118,11 +156,13 @@ export const data = Joi.object({
             Joi.object({
                 QtdTransacoes: Joi.number()
                     .example(10)
-                    .required(),
+                    .required()
+                    .positive(),
                 ValorTransacoes: Joi.number()
                     .precision(2)
                     .example(125.60)
-                    .required(),
+                    .required()
+                    .positive(),
                 DetalhamentoTransacoes: Joi.number()
                     .required()
                     .valid(1, 2, 3, 4, 5)
@@ -139,11 +179,13 @@ export const data = Joi.object({
     Devolucao: Joi.object({
         QtdDevolucoes: Joi.number()
             .example(10)
-            .required(),
+            .required()
+            .positive(),
         ValorDevolucoes: Joi.number()
             .precision(2)
             .example(125.60)
-            .required(),
+            .required()
+            .positive(),
     }).required()
         .label("Devolucao"),
     Receitas: Joi.array()
@@ -151,7 +193,8 @@ export const data = Joi.object({
             ValorReceita: Joi.number()
                 .precision(2)
                 .example(125.60)
-                .required(),
+                .required()
+                .positive(),
             FonteReceita: Joi.number()
                 .required()
                 .valid(1, 2, 3)

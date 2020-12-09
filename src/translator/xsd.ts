@@ -7,9 +7,9 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
   <!-- +  BANCO CENTRAL DO BRASIL                                           + -->
   <!-- +  Documento 1201						    						+ -->
-  <!-- +  Versão 1.0.3							  							+ -->
+  <!-- +  Versão 1.0.5							  							+ -->
   <!-- +  Publicado em Outubro/2020			                    			+ -->
-  <!-- +  Atualizado em 03/12/2020                                          + -->
+  <!-- +  Atualizado em 09/12/2020                                          + -->
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- ******************************* -->
 	<!-- Definicao dos elementos simples -->
@@ -160,7 +160,7 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 		<xs:restriction base='xs:decimal'>
 			<xs:totalDigits value='5' />
 			<xs:fractionDigits value='1' />
-			<xs:maxExclusive value='100000' />
+			<xs:maxExclusive value='10000' /> <!-- NR v.1.0.5 -->
 			<xs:minInclusive value='0' /> <!-- NR v.1.0.1 -->
 		</xs:restriction>
 	</xs:simpleType>
@@ -176,9 +176,9 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 
 	<xs:simpleType name='tipoPorcentagemComZero'>
 		<xs:restriction base='xs:decimal'>
-			<xs:totalDigits value='4' />
+			<xs:totalDigits value='5' /> <!-- NR v.1.0.4 -->
 			<xs:fractionDigits value='2' />
-			<xs:maxExclusive value='100' />
+			<xs:maxInclusive value='100' /> <!-- NR v.1.0.4 -->
 			<xs:minInclusive value='0' />
 		</xs:restriction>
 	</xs:simpleType>
@@ -290,7 +290,6 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
         </xs:simpleType>
 
 </xs:schema>`;
-
 
 const convertedSchemas = xs2js.processAllSchemas({
 	schemas: { 'APIX.xsd': XML_SCHEMA }
