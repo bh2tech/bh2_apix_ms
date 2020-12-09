@@ -6,7 +6,7 @@ A bh2 é uma Consultoria de Negócios e Desenvolvimento de Software que atua pri
 
 ## Description
 
-O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedores na geração dos arquivos **APIX001** e **APIX002**, devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela Instrução Normativa nº 32, de 26 de outubro de 2020. Fiquem à vontade para contribuir neste repositório.
+O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedores na geração dos arquivos **APIX001** e **APIX002**, devem ser enviadas nestes arquivos informações do Arranjo de Pagamentos Pix definidas pela [Instrução Normativa nº 32](https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=32), de 26 de outubro de 2020. Fiquem à vontade para contribuir neste repositório.
 
 **Material de apoio:**
 
@@ -14,6 +14,7 @@ O objetivo deste repositório é oferecer um  meio de auxiliar os desenvolvedore
 - [Layout do Arquivo](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001.xlsx)
 - [Manual de Tempos do Pix](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/IX_ManualdeTemposdoPix_versao2-1.pdf)  
 - [Arquivo XSD](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001.xsd)  
+- [Arquivos de Exemplo](https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001-exemplos.zip)  
 
 => *Para envio das informações deverão ser observados os procedimentos dispostos no Anexo II à Instrução Normativa nº 32, de 2020, bem como as orientações específicas a serem divulgadas pelo Banco Central do Brasil.*
 
