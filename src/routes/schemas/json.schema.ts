@@ -57,6 +57,7 @@ export const data = Joi.object({
     Perc50TempoExpUsuarioInter: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -65,6 +66,7 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioInter: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -73,6 +75,7 @@ export const data = Joi.object({
     Perc50TempoExpUsuarioIntra: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -81,6 +84,7 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioIntra: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -89,6 +93,7 @@ export const data = Joi.object({
     Perc99TempoUsuarioConsulta: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -98,6 +103,7 @@ export const data = Joi.object({
     Perc99TempoEnvioRegistro: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -107,6 +113,7 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioRegistro: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -116,6 +123,7 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioExclusao: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -125,6 +133,7 @@ export const data = Joi.object({
     Perc99TempoNotificacaoPortabilidade: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -134,6 +143,7 @@ export const data = Joi.object({
     Perc99TempoEnvioPortabilidade: Joi.number()
         .required()
         .positive()
+        .allow(0.0)
         .precision(1)
         .example(5.2)
         .description(`Percentil 99 dos tempos (em segundos)detalhados na seção 3.2.2.3 do Manual de Tempos do Pix (Versão 2.0). (NR)
@@ -143,11 +153,13 @@ export const data = Joi.object({
     QtdConsultas: Joi.number()
         .required()
         .positive()
+        .allow(0)
         .example(5)
         .description("Quantidade de consultas à base interna do participante"),
     IndiceDisponibilidade: Joi.number()
         .required()
         .positive()
+        .allow(0)
         .precision(2)
         .example(99.85)
         .description("Índice de disponibilidade"),
@@ -157,12 +169,14 @@ export const data = Joi.object({
                 QtdTransacoes: Joi.number()
                     .example(10)
                     .required()
-                    .positive(),
+                    .positive()
+                    .allow(0),
                 ValorTransacoes: Joi.number()
                     .precision(2)
                     .example(125.60)
                     .required()
-                    .positive(),
+                    .positive()
+                    .allow(0),
                 DetalhamentoTransacoes: Joi.number()
                     .required()
                     .valid(1, 2, 3, 4, 5)
@@ -180,12 +194,14 @@ export const data = Joi.object({
         QtdDevolucoes: Joi.number()
             .example(10)
             .required()
-            .positive(),
+            .positive()
+            .allow(0),
         ValorDevolucoes: Joi.number()
             .precision(2)
             .example(125.60)
             .required()
-            .positive(),
+            .positive()
+            .allow(0),
     }).required()
         .label("Devolucao"),
     Receitas: Joi.array()
@@ -194,7 +210,8 @@ export const data = Joi.object({
                 .precision(2)
                 .example(125.60)
                 .required()
-                .positive(),
+                .positive()
+                .allow(0),
             FonteReceita: Joi.number()
                 .required()
                 .valid(1, 2, 3)
