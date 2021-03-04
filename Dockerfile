@@ -1,6 +1,10 @@
 # Build
 FROM node:12.16.3-alpine as build-env
 
+RUN apk add --update --no-cache build-base python3 && ln -sf python3 /usr/bin/python && \
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools
+
 COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
 COPY ./tsconfig.json /app/tsconfig.json
