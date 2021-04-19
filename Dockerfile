@@ -13,6 +13,7 @@ WORKDIR /app
 
 COPY ./src/ /app/src/
 
+RUN apk add build-base
 RUN npm ci
 RUN npm audit fix
 RUN npm run build
