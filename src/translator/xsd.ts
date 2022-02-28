@@ -158,9 +158,9 @@ const XML_SCHEMA = `<?xml version='1.0' encoding='UTF-8'?>
 	
 	<xs:simpleType name='tipoValorTempo'>
 		<xs:restriction base='xs:decimal'>
-			<xs:totalDigits value='5' />
-			<xs:fractionDigits value='1' />
-			<xs:maxExclusive value='10000' /> <!-- NR v.1.0.5 -->
+			<xs:totalDigits value='8' /> <!-- NR v.1.0.6 -->
+			<xs:fractionDigits value='2' /> <!-- NR v.1.0.6 -->
+			<xs:maxExclusive value='1000000' /> <!-- NR v.1.0.6 --> <!-- NR v.1.0.5 --> 
 			<xs:minInclusive value='0' /> <!-- NR v.1.0.1 -->
 		</xs:restriction>
 	</xs:simpleType>

@@ -106,8 +106,8 @@ export default class FileService {
         <FonteReceita>3</FonteReceita>
       </Receita>
     </Receitas>
-    <TemposTransacoes Perc50TempoExpUsuarioInter="50.2" Perc99TempoExpUsuarioInter="50.2" Perc50TempoExpUsuarioIntra="50.2" Perc99TempoExpUsuarioIntra="50.2" />
-    <TemposDict Perc99TempoUsuarioConsulta="50.2" Perc99TempoEnvioRegistro="50.2" Perc99TempoExpUsuarioRegistro="50.2" Perc99TempoExpUsuarioExclusao="50.2" Perc99TempoNotificacaoPortabilidade="50.2" Perc99TempoEnvioPortabilidade="50.2" />
+    <TemposTransacoes Perc50TempoExpUsuarioInter="50.23" Perc99TempoExpUsuarioInter="99.23" Perc50TempoExpUsuarioIntra="50.23" Perc99TempoExpUsuarioIntra="99.23" />
+    <TemposDict Perc99TempoUsuarioConsulta="99.23" Perc99TempoEnvioRegistro="99.23" Perc99TempoExpUsuarioRegistro="99.23" Perc99TempoExpUsuarioExclusao="99.23" Perc99TempoNotificacaoPortabilidade="99.23" Perc99TempoEnvioPortabilidade="99.23" />
     <ConsultasDict QtdConsultas="1234" />
     <Disponibilidade IndiceDisponibilidade="99.98" />
     </${query.TipoArquivo}>`;
@@ -147,8 +147,8 @@ export default class FileService {
       content += `     </Receita>\r\n`;
     }
     content += `  </Receitas>\r\n`;
-    content += `  <TemposTransacoes Perc50TempoExpUsuarioInter="${data.Perc50TempoExpUsuarioInter.toFixed(1)}" Perc99TempoExpUsuarioInter="${data.Perc99TempoExpUsuarioInter.toFixed(1)}" Perc50TempoExpUsuarioIntra="${data.Perc50TempoExpUsuarioIntra.toFixed(1)}" Perc99TempoExpUsuarioIntra="${data.Perc99TempoExpUsuarioIntra.toFixed(1)}" />\r\n`;
-    content += `  <TemposDict Perc99TempoUsuarioConsulta="${data.Perc99TempoUsuarioConsulta.toFixed(1)}" Perc99TempoEnvioRegistro="${data.Perc99TempoEnvioRegistro.toFixed(1)}" Perc99TempoExpUsuarioRegistro="${data.Perc99TempoExpUsuarioRegistro.toFixed(1)}" Perc99TempoExpUsuarioExclusao="${data.Perc99TempoExpUsuarioExclusao.toFixed(1)}" Perc99TempoNotificacaoPortabilidade="${data.Perc99TempoNotificacaoPortabilidade.toFixed(1)}" Perc99TempoEnvioPortabilidade="${data.Perc99TempoEnvioPortabilidade.toFixed(1)}" />\r\n`;
+    content += `  <TemposTransacoes Perc50TempoExpUsuarioInter="${data.Perc50TempoExpUsuarioInter.toFixed(2)}" Perc99TempoExpUsuarioInter="${data.Perc99TempoExpUsuarioInter.toFixed(2)}" Perc50TempoExpUsuarioIntra="${data.Perc50TempoExpUsuarioIntra.toFixed(2)}" Perc99TempoExpUsuarioIntra="${data.Perc99TempoExpUsuarioIntra.toFixed(2)}" />\r\n`;
+    content += `  <TemposDict Perc99TempoUsuarioConsulta="${data.Perc99TempoUsuarioConsulta.toFixed(2)}" Perc99TempoEnvioRegistro="${data.Perc99TempoEnvioRegistro.toFixed(2)}" Perc99TempoExpUsuarioRegistro="${data.Perc99TempoExpUsuarioRegistro.toFixed(2)}" Perc99TempoExpUsuarioExclusao="${data.Perc99TempoExpUsuarioExclusao.toFixed(2)}" Perc99TempoNotificacaoPortabilidade="${data.Perc99TempoNotificacaoPortabilidade.toFixed(2)}" Perc99TempoEnvioPortabilidade="${data.Perc99TempoEnvioPortabilidade.toFixed(2)}" />\r\n`;
     content += `  <ConsultasDict QtdConsultas="${data.QtdConsultas}" />\r\n`;
     content += `  <Disponibilidade IndiceDisponibilidade="${data.IndiceDisponibilidade.toFixed(2)}" />\r\n`;
     content += `</${data.TipoArquivo}>`;

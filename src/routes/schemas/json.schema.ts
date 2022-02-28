@@ -57,45 +57,45 @@ export const data = Joi.object({
     Perc50TempoExpUsuarioInter: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(50.23)
         .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
         `),
     Perc99TempoExpUsuarioInter: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(50.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
         `),
     Perc50TempoExpUsuarioIntra: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(50.23)
         .description(`Percentil 50 (mediana) dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
         Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
         `),
     Perc99TempoExpUsuarioIntra: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.1.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
         Diferença entre os marcos de tempo t6a e t0’ definidos no referido manual (t6a – t0’).
         `),
     Perc99TempoUsuarioConsulta: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP com acesso direto ao DICT: Etapas 4 a 15 do fluxo detalhado na seção 8.1 do Manual Operacional do DICT (Versão 2.0).
         PSP com acesso indireto ao DICT: Etapas 4 a 19 do fluxo detalhado na seção 8.2 do Manual Operacional do DICT (Versão 2.0).
@@ -103,9 +103,9 @@ export const data = Joi.object({
     Perc99TempoEnvioRegistro: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP com acesso direto ao DICT: Etapas 4 a 5 do fluxo detalhado na seção 3.1 do Manual Operacional do DICT (Versão 2.0).
         PSP com acesso indireto ao DICT: Etapas 4 a 5 do fluxo detalhado na seção 3.2 do Manual Operacional do DICT (Versão 2.0).
@@ -113,9 +113,9 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioRegistro: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP com acesso direto ao DICT: Etapas 6 a 15 do fluxo detalhado na seção 3.1 do Manual Operacional do DICT (Versão 2.0).
         PSP com acesso indireto ao DICT: Etapas 6 a 19 do fluxo detalhado na seção 3.2 do Manual Operacional do DICT (Versão 2.0).
@@ -123,9 +123,9 @@ export const data = Joi.object({
     Perc99TempoExpUsuarioExclusao: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.1 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP com acesso direto ao DICT: Etapas 4 a 13 do fluxo detalhado na seção 4.1 do Manual Operacional do DICT (Versão 2.0).
         PSP com acesso indireto ao DICT: Etapas 4 a 17 do fluxo detalhado na seção 4.2 do Manual Operacional do DICT (Versão 2.0).
@@ -133,9 +133,9 @@ export const data = Joi.object({
     Perc99TempoNotificacaoPortabilidade: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos) detalhados na seção 3.2.2.2 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP doador com acesso direto ao DICT: Etapas 1 a 2 dos fluxos detalhados nas seções 5.3 e 6.3  do Manual Operacional do DICT (Versão 2.0).
         PSP doador com acesso indireto ao DICT: Etapas 1 a 6 do fluxo detalhado nas seções 5.4 e 6.4 do Manual Operacional do DICT (Versão 2.0).
@@ -143,9 +143,9 @@ export const data = Joi.object({
     Perc99TempoEnvioPortabilidade: Joi.number()
         .required()
         .positive()
-        .allow(0.0)
-        .precision(1)
-        .example(5.2)
+        .allow(0.00)
+        .precision(2)
+        .example(99.23)
         .description(`Percentil 99 dos tempos (em segundos)detalhados na seção 3.2.2.3 do Manual de Tempos do Pix (Versão 2.0). (NR)
         PSP doador com acesso direto ao DICT: Etapas 8 a 12 (portabilidade) e 8 a 19 (reinvindicação) a 2 dos fluxos detalha-dos nas seções 5.3 e 6.3  do Manual Ope-racional do DICT (Versão 2.0).
         PSP doador com acesso indireto ao DICT: Etapas 10 a 14 (portabilidade) e 10 a 25 (reinvindicação) do fluxo deta-lhado nas seções 5.4 e 6.4 do Manual Operacional do DICT (Versão 2.0).
