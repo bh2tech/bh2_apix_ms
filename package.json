@@ -26,7 +26,7 @@
     "sequelize-typescript": "^1.1.0",
     "typescript": "^3.9.6",
     "uuid": "^8.2.0",
-    "xhelpers-api": "2.1.11",
+    "xhelpers-api": "2.1.21",
     "xml2json": "0.12.0",
     "xsd2jsonschema": "0.3.7"
   },
